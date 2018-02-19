@@ -75,7 +75,7 @@ def load_labels(label_file):
   return label
 
 
-if __name__ == "__main__":
+def classify():
   file_name = "tensorflow/examples/label_image/data/grace_hopper.jpg"
   model_file = \
     "tensorflow/examples/label_image/data/inception_v3_2016_08_28_frozen.pb"
@@ -141,3 +141,6 @@ if __name__ == "__main__":
   labels = load_labels(label_file)
   for i in top_k:
     print(labels[i], results[i])
+
+if __name__ == "__main__":
+  classify()
