@@ -20,7 +20,11 @@ from __future__ import print_function
 import argparse
 
 import numpy as np
+import os
 import tensorflow as tf
+
+# Silence warnings
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 def load_graph(model_file):
   graph = tf.Graph()
