@@ -28,8 +28,8 @@ if __name__ == '__main__':
   cam = cv2.VideoCapture(0)
   while (1 == 1):
     i, img = cam.read()
-    cv2.imwrite("fromCamera.png", img)
-    height, width, channels = img.shape
+    scaledImg = cv2.resize(img, (299, 299), interpolation = cv2.INTER_CUBIC)
+    cv2.imwrite("fromCamera.png", scaledImg)
     result = str(li.classify("fromCamera.png", "output_graph.pb", "output_labels.txt",
               299, 299, 128, 128, "Mul", "final_result", "true"))
     objects = result.split()
