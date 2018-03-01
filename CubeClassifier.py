@@ -29,10 +29,10 @@ if __name__ == '__main__':
   graph = li.load_graph("quantized_graph.pb")
   while (1 == 1):
     i, img = cam.read()
-    scaledImg = cv2.resize(img, (299, 299), interpolation = cv2.INTER_CUBIC)
+    scaledImg = cv2.resize(img, (224, 224), interpolation = cv2.INTER_CUBIC)
     cv2.imwrite("fromCamera.png", scaledImg)
     result = str(li.classify("fromCamera.png", graph, "output_labels.txt",
-              299, 299, 128, 128, "Mul", "final_result", True))
+              224, 224, 128, 128, "input", "final_result", True))
     objects = result.split()
     if ("cube" in objects[0]):
       sd.putNumber("isCube", "true");
