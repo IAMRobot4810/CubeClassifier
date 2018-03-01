@@ -26,7 +26,7 @@ if __name__ == '__main__':
   NetworkTables.initialize(server=ip);
   sd = NetworkTables.getTable("SmartDashboard");
   cam = cv2.VideoCapture(0)
-  graph = li.load_graph("output_graph.pb")
+  graph = li.load_graph("quantized_graph.pb")
   while (1 == 1):
     i, img = cam.read()
     scaledImg = cv2.resize(img, (299, 299), interpolation = cv2.INTER_CUBIC)
