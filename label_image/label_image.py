@@ -79,9 +79,9 @@ def classify(file_name="tensorflow/examples/label_image/data/grace_hopper.jpg",
   model_file="tensorflow/examples/label_image/data/inception_v3_2016_08_28_frozen.pb",
   label_file="tensorflow/examples/label_image/data/imagenet_slim_labels.txt",
   input_height=299, input_width=299, input_mean=0, input_std=255, input_layer="input",
-  output_layer="InceptionV3/Predictions/Reshape_1", imported="false"):
+  output_layer="InceptionV3/Predictions/Reshape_1", imported=False):
 
-  if (imported == "false"):
+  if not imported:
     parser = argparse.ArgumentParser()
     parser.add_argument("--image", help="image to be processed")
     parser.add_argument("--graph", help="graph/model to be executed")
@@ -113,7 +113,11 @@ def classify(file_name="tensorflow/examples/label_image/data/grace_hopper.jpg",
     if args.output_layer:
       output_layer = args.output_layer
 
-  graph = load_graph(model_file)
+  if imported:
+    graph = model_file
+  else:
+    graph = load_graph(model_file)
+
   t = read_tensor_from_image_file(
       file_name,
       input_height=input_height,
@@ -135,7 +139,7 @@ def classify(file_name="tensorflow/examples/label_image/data/grace_hopper.jpg",
   top_k = results.argsort()[-5:][::-1]
   labels = load_labels(label_file)
   for i in top_k:
-    if (imported == "true"):
+    if imported:
       return labels[i], results[i]
     else:
       print(labels[i], results[i])
